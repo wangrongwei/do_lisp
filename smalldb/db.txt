@@ -1,0 +1,2 @@
+
+(#1=((:|TITLE| "welcome to bj" :|ARTIST| "wrw" :|RATING| 8. :|RIPPED| |COMMON-LISP|::|T|) #2=((:|TITLE| "where go" :|ARTIST| "mj" :|RATING| 7. :|RIPPED| |COMMON-LISP|::|T|) #3=((:|TITLE| "spring" :|ARTIST| "mj" :|RATING| 6. :|RIPPED| |COMMON-LISP|::|T|)) . #3#) . #2#) . #1#) 

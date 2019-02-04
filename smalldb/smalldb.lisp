@@ -1,6 +1,9 @@
 ;
-; a simple Data library
-;
+; a simple Database, in this program, support functions below:
+; 1. dump-db: display record of *db*
+; 2. add-ads: according to enter Title/Author...add record
+; 3. save-db/load-db: save *db* to file or load *db* from file
+; 
 
 (defvar *db* nil)
 
@@ -8,9 +11,15 @@
 	(list :title title :artist artist :rating rating :ripped ripped))
 
 (defun add-record (cd) (push cd *db*))
+
+; clear *db* data
+(defun clear-record ()
+	(setq *db* nil))
+
+; a function to display *db* friendly
 (defun dump-db () 
 	(dolist (cd *db*)
-		(format t "~{~a: ~10t~a~%~}~%" cd)))
+		(format t "~{~{~a: ~10t~a~%~}~%~}" cd)))
 
 
 
@@ -33,6 +42,7 @@
 			(or (parse-integer (prompt-read "Rating") :junk-allowed t) 0)
 			(y-or-n-p "Ripped [y/n] : "))))
 
+; bug!!
 (defun add-ads ()
 	(loop (add-record (prompt-for-cd))
 		(if (not (y-or-n-p "Another? [y/n]: ")) (return))))
@@ -90,6 +100,24 @@
 					(if rating (setf (getf row :rating) rating))
 					(if ripped-p (setf (getf row :ripped) ripped)))
 					row) *db*)))
+
+;
+(defun delete-rows (selector-fn)
+	(setf *db* (remove-if selector-fn *db*)))
+
+(defmacro backwards (expr) (reverse expr))
+
+
+; if or not lisp support . and ..
+; first step
+; (load-db "xxx")
+; second step
+; (save-db "xxx")
+
+
+; usage: load cd-lib when open this program first
+(load-db "D:/git/do_lisp/smalldb/db.txt")
+
 
 
 
